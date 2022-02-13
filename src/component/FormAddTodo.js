@@ -1,12 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {addTodo} from '../store/todoSlice'
 
 const FormAddTodo = () => {
+  const dispatch = useDispatch()
+  const todos = useSelector(state => state.todos.todos)
+  const [title, setTitle] = useState()
+  const changeTitle = e => {
+    setTitle(e.target.value)
+  }
     const handleSubmit = (e) => {
         e.preventDefault()
+        dispatch(addTodo(title))
+        setTitle('')
     }
   return (
     <form className = 'add-form'>
-        <input type = 'text' />
+        <input value = {title} onChange = {changeTitle} type = 'text'/>
         <button type = 'submit' onClick = {handleSubmit}>
             ADD
         </button>
