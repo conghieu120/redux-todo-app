@@ -11,7 +11,7 @@ const FormAddTodo = () => {
   }
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(addTodo(title))
+        if(title.trim() !== '') dispatch(addTodo(title.trim()))
         setTitle('')
     }
   return (
